@@ -63,6 +63,12 @@ export const torqApi = createApi({
     getPayments: builder.query<any, GetPaymentsQueryParams>({
       query: (params) => queryParamsBuilder("payments", params, true),
     }),
+    getPaymentsSummary: builder.query<
+      any,
+      { filter?: any }
+      >({
+      query: ({ filter }) => `summary/payments?${filter ? "&filter=" + JSON.stringify(filter) : ""}`,
+    }),
     getInvoices: builder.query<any, GetInvoicesQueryParams>({
       query: (params) => queryParamsBuilder("invoices", params, true),
     }),
@@ -185,6 +191,7 @@ export const {
   useGetForwardsQuery,
   useGetDecodedInvoiceQuery,
   useGetPaymentsQuery,
+  useGetPaymentsSummaryQuery,
   useGetInvoicesQuery,
   useGetOnChainTxQuery,
   useGetTableViewsQuery,

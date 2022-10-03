@@ -22,6 +22,7 @@ import (
 	"github.com/lncapital/torq/internal/on_chain_tx"
 	"github.com/lncapital/torq/internal/payments"
 	"github.com/lncapital/torq/internal/settings"
+	"github.com/lncapital/torq/internal/summary"
 	"github.com/lncapital/torq/internal/views"
 	"github.com/ulule/limiter/v3"
 	mgin "github.com/ulule/limiter/v3/drivers/middleware/gin"
@@ -142,6 +143,11 @@ func registerRoutes(r *gin.Engine, db *sqlx.DB, apiPwd string, restartLNDSub fun
 		flowRoutes := api.Group("/flow")
 		{
 			flow.RegisterFlowRoutes(flowRoutes, db)
+		}
+
+		summaryRoutes := api.Group("/summary")
+		{
+			summary.RegisterSummaryRoutes(summaryRoutes, db)
 		}
 
 		messageRoutes := api.Group("messages")

@@ -50,6 +50,57 @@
   grid-area: Totals;
   display: grid;
 }
+
+.pageRow {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+}
+
+.tripleRow {
+  grid-auto-columns: 1fr;
+  @media only screen and (max-width: 900px) {
+    grid-row-gap: 10px;
+    grid-auto-flow: row;
+    grid-template-rows: auto;
+  }
+}
+
+.card {
+  background-color: var(--bg-default);
+  border: 1px solid var(--material-layer-3);
+  padding: 20px;
+  font-size: var(--font-size-small);
+  //box-shadow: var(--popover-box-shadow);
+  border-radius: 3px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  @media only screen and (max-width: 600px) {
+    padding: 10px;
+  }
+}
+
+.cardRow {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.rowLabel,
+.rowValue {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  grid-column-gap: 5px;
+  line-height: 150%;
+}
+
+.rowValue {
+  font-size: var(--font-size-XL);
+  font-weight: bold;
+}
+
 .paginationWrapper {
   grid-area: Pagination;
   @media only screen and (max-width: 900px) {

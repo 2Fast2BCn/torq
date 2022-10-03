@@ -36,6 +36,7 @@ import {
   updateColumns,
   updatePaymentsFilters,
 } from "./paymentsSlice";
+import PaymentsHeader from "./PaymentsHeader";
 
 type sections = {
   filter: boolean;
@@ -269,10 +270,16 @@ function PaymentsPage() {
       offsetHandler={setOffset}
     />
   );
+
+  const pageTotals = (
+    <PaymentsHeader />
+  );
+
   return (
     <TablePageTemplate
       title={"Payments"}
       breadcrumbs={breadcrumbs}
+      pageTotals={pageTotals}
       sidebarExpanded={sidebarExpanded}
       sidebar={sidebar}
       tableControls={tableControls}
