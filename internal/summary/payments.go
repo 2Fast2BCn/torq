@@ -16,16 +16,16 @@ func getPaymentsSummary(db *sqlx.DB, filter sq.Sqlizer) (*Payments, error) {
 
 	//language=PostgreSQL
 	qb := sq.Select(`
-				count(*) as cnt,
-				sum((value_msat/1000))::INTEGER as total_amt,
-				sum((fee_msat/1000))::INTEGER as total_fees
+				COALESCE(COUNT(*), 0) AS cnt,
+				COALESCE(SUM((value_msat/1000))::INTEGER, 0) AS total_amt,
+				COALESCE(SUM((fee_msat/1000))::INTEGER, 0) AS total_fees
 			`).
 		PlaceholderFormat(sq.Dollar).
 		From("payment").
 		Where(filter).
 		Prefix(`WITH
-			tz AS (select preferred_timezone as tz from settings),
-			pub_keys as (select array_agg(pub_key) from local_node)
+			tz AS (SELECT preferred_timezone AS tz FROM settings),
+			pub_keys AS (SELECT array_agg(pub_key) FROM local_node)
 		`)
 
 	qs, args, err := qb.ToSql()

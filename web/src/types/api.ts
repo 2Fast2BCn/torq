@@ -32,6 +32,10 @@ export type GetDecodedInvoiceQueryParams = {
   invoice: string;
 };
 
+export type PaymentsSummaryQueryParams = {
+  filter?: Record<string, unknown>;
+};
+
 export type GetPaymentsQueryParams = BaseQueryCollectionParams;
 
 export type GetInvoicesQueryParams = BaseQueryCollectionParams;

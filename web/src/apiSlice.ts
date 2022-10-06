@@ -1,9 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ViewInterface, viewOrderInterface } from "features/forwards/forwardsSlice";
-import { settings, timeZone, localNode } from "apiTypes";
 import { getRestEndpoint, getWsEndpoint } from "utils/apiUrlBuilder";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { Clause } from "features/sidebar/sections/filter/filter";
 import type {
   GetChannelHistoryQueryParams,
   GetDecodedInvoiceQueryParams,
@@ -12,9 +10,10 @@ import type {
   GetInvoicesQueryParams,
   GetOnChainTransactionsQueryParams,
   GetPaymentsQueryParams,
+  PaymentsSummaryQueryParams,
 } from "types/api";
 import { queryParamsBuilder } from "utils/queryParamsBuilder";
-import type { localNode, settings, timeZone } from "./apiTypes";
+import type { localNode, settings, timeZone } from "apiTypes";
 
 const API_URL = getRestEndpoint();
 export const WS_URL = getWsEndpoint();
@@ -64,11 +63,8 @@ export const torqApi = createApi({
     getPayments: builder.query<any, GetPaymentsQueryParams>({
       query: (params) => queryParamsBuilder("payments", params, true),
     }),
-    getPaymentsSummary: builder.query<
-      any,
-      { filter?: Clause }
-      >({
-      query: ({ filter }) => `summary/payments?${filter ? "&filter=" + JSON.stringify(filter) : ""}`,
+    getPaymentsSummary: builder.query<any, PaymentsSummaryQueryParams>({
+      query: (params) => queryParamsBuilder("summary/payments", params),
     }),
     getInvoices: builder.query<any, GetInvoicesQueryParams>({
       query: (params) => queryParamsBuilder("invoices", params, true),
