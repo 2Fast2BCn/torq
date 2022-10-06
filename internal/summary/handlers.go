@@ -39,14 +39,10 @@ func getPaymentsSummaryHandler(c *gin.Context, db *sqlx.DB) {
 	}
 
 	r, err := getPaymentsSummary(db, filter)
-	switch err.(type) {
-	case nil:
-		break
-	default:
+	if err != nil {
 		server_errors.LogAndSendServerError(c, err)
 		return
 	}
-
 	c.JSON(http.StatusOK, r)
 }
 

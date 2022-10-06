@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ViewInterface, viewOrderInterface } from "features/forwards/forwardsSlice";
+import { settings, timeZone, localNode } from "apiTypes";
 import { getRestEndpoint, getWsEndpoint } from "utils/apiUrlBuilder";
-
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { Clause } from "features/sidebar/sections/filter/filter";
 import type {
   GetChannelHistoryQueryParams,
   GetDecodedInvoiceQueryParams,
@@ -65,7 +66,7 @@ export const torqApi = createApi({
     }),
     getPaymentsSummary: builder.query<
       any,
-      { filter?: any }
+      { filter?: Clause }
       >({
       query: ({ filter }) => `summary/payments?${filter ? "&filter=" + JSON.stringify(filter) : ""}`,
     }),

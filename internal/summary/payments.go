@@ -40,10 +40,7 @@ func getPaymentsSummary(db *sqlx.DB, filter sq.Sqlizer) (*Payments, error) {
 		&r.TotalFees,
 	)
 
-	switch err {
-	case nil:
-		break
-	default:
+	if err != nil {
 		return nil, err
 	}
 

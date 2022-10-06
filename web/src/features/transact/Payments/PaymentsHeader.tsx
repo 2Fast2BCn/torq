@@ -1,10 +1,10 @@
-import styles from "../../templates/tablePageTemplate/table-page-template.module.scss";
+import styles from "features/templates/tablePageTemplate/table-page-template.module.scss";
 import classNames from "classnames";
 import * as d3 from "d3";
-import {useGetPaymentsSummaryQuery} from "../../../apiSlice";
-import {deserialiseQuery} from "../../sidebar/sections/filter/filter";
-import {useAppSelector} from "../../../store/hooks";
-import {selectPaymentsFilters} from "./paymentsSlice";
+import {useGetPaymentsSummaryQuery} from "apiSlice";
+import {deserialiseQuery} from "features/sidebar/sections/filter/filter";
+import {useAppSelector} from "store/hooks";
+import {selectPaymentsFilters} from "features/transact/Payments/paymentsSlice";
 
 const ft = d3.format(",.0f");
 

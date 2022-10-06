@@ -24,19 +24,19 @@ import TablePageTemplate, {
 import { useState } from "react";
 import { useLocation } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { SectionContainer } from "../../section/SectionContainer";
-import { Clause, deserialiseQuery, FilterInterface } from "../../sidebar/sections/filter/filter";
-import FilterSection from "../../sidebar/sections/filter/FilterSection";
-import TransactTabs from "../TransactTabs";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { SectionContainer } from "features/section/SectionContainer";
+import { Clause, deserialiseQuery, FilterInterface } from "features/sidebar/sections/filter/filter";
+import FilterSection from "features/sidebar/sections/filter/FilterSection";
+import TransactTabs from "features/transact/TransactTabs";
 import {
   selectActiveColumns,
   selectAllColumns,
   selectPaymentsFilters,
   updateColumns,
   updatePaymentsFilters,
-} from "./paymentsSlice";
-import PaymentsHeader from "./PaymentsHeader";
+} from "features/transact/Payments/paymentsSlice";
+import PaymentsHeader from "features/transact/Payments/PaymentsHeader";
 
 type sections = {
   filter: boolean;
@@ -271,15 +271,11 @@ function PaymentsPage() {
     />
   );
 
-  const pageTotals = (
-    <PaymentsHeader />
-  );
-
   return (
     <TablePageTemplate
       title={"Payments"}
       breadcrumbs={breadcrumbs}
-      pageTotals={pageTotals}
+      pageTotals={<PaymentsHeader />}
       sidebarExpanded={sidebarExpanded}
       sidebar={sidebar}
       tableControls={tableControls}
